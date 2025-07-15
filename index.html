@@ -1,48 +1,448 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2822
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes-Benz Panónska - Market Intelligence Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="sk">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>Mercedes-Benz Pan\'f3nska - Market Intelligence Dashboard</title>\
-    <style>\
-        /* Kompletn\'e9 CSS inline */\
-        * \{ margin: 0; padding: 0; box-sizing: border-box; \}\
-        body \{ \
-            font-family: 'Segoe UI', sans-serif;\
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);\
-            color: #333;\
-            min-height: 100vh;\
-        \}\
-        .header \{\
-            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);\
-            color: white;\
-            padding: 1rem 2rem;\
-        \}\
-        /* ... zvy\'9aok \'9at\'fdlov ... */\
-    </style>\
-</head>\
-<body>\
-    <!-- Kompletn\'fd HTML dashboard -->\
-    <div class="App">\
-        <header class="header">\
-            <h1 style="color: #00ADEF;">Mercedes-Benz Pan\'f3nska</h1>\
-            <p>Market Intelligence Dashboard</p>\
-        </header>\
-        <!-- ... zvy\'9aok HTML ... -->\
-    </div>\
-    \
-    <script>\
-        // JavaScript pre interaktivitu\
-        function showTab(tabName) \{\
-            // Tab switching logic\
-        \}\
-    </script>\
-</body>\
-</html>}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #00ADEF;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .update-time {
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .navigation {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            background: #00ADEF;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: #0088CC;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 173, 239, 0.3);
+        }
+
+        .main-content {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            color: white;
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .alerts-section {
+            margin-bottom: 3rem;
+        }
+
+        .alert {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 5px solid #00ADEF;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .alert:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .alert.warning {
+            border-left-color: #F59E0B;
+        }
+
+        .alert.info {
+            border-left-color: #3B82F6;
+        }
+
+        .alert h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .alert p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .kpi-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid #00ADEF;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .kpi-card h3 {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #00ADEF;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .kpi-target {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-trend {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #10B981;
+        }
+
+        .footer {
+            background: #000000;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+            color: #cccccc;
+        }
+
+        .footer p:first-child {
+            color: #00ADEF;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animation Effects */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .kpi-card, .alert {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Mercedes-Benz Panónska</h1>
+        <p>Market Intelligence Dashboard</p>
+        <p class="update-time">Posledná aktualizácia: 15. júl 2025 | Automatizovaná úloha: Každý pondelok 6:00</p>
+    </header>
+
+    <nav class="navigation">
+        <button class="nav-btn">📊 Dashboard</button>
+        <button class="nav-btn">📈 Trhové Údaje</button>
+        <button class="nav-btn">🔍 Konkurencia</button>
+        <button class="nav-btn">🎯 Akčné Kroky</button>
+        <button class="nav-btn">📱 Social Media</button>
+    </nav>
+
+    <main class="main-content">
+        <div class="alerts-section">
+            <h2 class="section-title">🚨 Aktuálne Alerty</h2>
+            
+            <div class="alert warning">
+                <h4>🟡 Porsche Slovakia: Detekované cenové zmeny</h4>
+                <p>15.7.2025 06:30 - Monitoring detekoval zmeny v cenníku Porsche. Odporúčame okamžitú analýzu konkurenčných cien a prípravu response stratégie.</p>
+            </div>
+            
+            <div class="alert info">
+                <h4>🔵 Service queries +22% rast - príležitosť</h4>
+                <p>15.7.2025 06:15 - Významný nárast vyhľadávania servisných služieb. Ideálny čas na service expansion a marketing kampane.</p>
+            </div>
+
+            <div class="alert info">
+                <h4>🔵 Luxury segment +8.5% ročný rast</h4>
+                <p>15.7.2025 06:10 - Slovenský luxury automotive segment rastie nad očakávania. Mercedes-Benz má príležitosť zvýšiť market share.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">📊 Kľúčové KPI Metriky</h2>
+        
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <h3>Conversion Rate</h3>
+                <div class="kpi-value">18.5%</div>
+                <div class="kpi-target">Cieľ: 24.8%</div>
+                <div class="kpi-trend">+3.2% vs Q1</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Customer Satisfaction</h3>
+                <div class="kpi-value">4.4/5</div>
+                <div class="kpi-target">Cieľ: 4.7/5</div>
+                <div class="kpi-trend">+0.3 vs Q1</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Market Share</h3>
+                <div class="kpi-value">2.8%</div>
+                <div class="kpi-target">Cieľ: 3.5%</div>
+                <div class="kpi-trend">+0.4% vs Q1</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Service Revenue</h3>
+                <div class="kpi-value">285 EUR</div>
+                <div class="kpi-target">Cieľ: 340 EUR</div>
+                <div class="kpi-trend">+19% vs Q1</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Brand Sentiment</h3>
+                <div class="kpi-value">0.72</div>
+                <div class="kpi-target">Cieľ: 0.78</div>
+                <div class="kpi-trend">+0.05 vs Q1</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Lead Response Time</h3>
+                <div class="kpi-value">4.2 hod</div>
+                <div class="kpi-target">Cieľ: <2 hod</div>
+                <div class="kpi-trend">-1.1h vs Q1</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">📈 Slovenský Automotive Trh 2025</h2>
+        
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <h3>Celkový Market Size</h3>
+                <div class="kpi-value">2.76 mld. EUR</div>
+                <div class="kpi-target">Passenger cars trh na Slovensku</div>
+                <div class="kpi-trend">Statista 2025 data</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Očakávané Predaje</h3>
+                <div class="kpi-value">103,790</div>
+                <div class="kpi-target">vozidiel v roku 2025</div>
+                <div class="kpi-trend">+2.1% vs 2024</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Priemerná Cena</h3>
+                <div class="kpi-value">26,570 EUR</div>
+                <div class="kpi-target">na jedno vozidlo</div>
+                <div class="kpi-trend">+4.3% vs 2024</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Mercedes Market Share</h3>
+                <div class="kpi-value">13.2%</div>
+                <div class="kpi-target">na slovenskom trhu</div>
+                <div class="kpi-trend">7. pozícia</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Luxury Segment</h3>
+                <div class="kpi-value">+8.5%</div>
+                <div class="kpi-target">ročný rast segmentu</div>
+                <div class="kpi-trend">Nad očakávania</div>
+            </div>
+            <div class="kpi-card">
+                <h3>CAGR 2025-2029</h3>
+                <div class="kpi-value">0.43%</div>
+                <div class="kpi-target">stabilný rast trhu</div>
+                <div class="kpi-trend">Konzervatívny odhad</div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🎯 Akčné Kroky a ROI Kalkulácie</h2>
+        
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <h3>Service Expansion</h3>
+                <div class="kpi-value">ROI 260%</div>
+                <div class="kpi-target">Investícia: 46,000 EUR</div>
+                <div class="kpi-trend">→ 165,600 EUR/rok</div>
+            </div>
+            <div class="kpi-card">
+                <h3>SEO Optimalizácia</h3>
+                <div class="kpi-value">ROI 333%</div>
+                <div class="kpi-target">Investícia: 13,800 EUR</div>
+                <div class="kpi-trend">→ 59,800 EUR/rok</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Competitive Response</h3>
+                <div class="kpi-value">ROI 280%</div>
+                <div class="kpi-target">Investícia: 23,000 EUR</div>
+                <div class="kpi-trend">→ 87,400 EUR/rok</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Social Media Boost</h3>
+                <div class="kpi-value">ROI 245%</div>
+                <div class="kpi-target">Investícia: 8,500 EUR</div>
+                <div class="kpi-trend">→ 29,300 EUR/rok</div>
+            </div>
+            <div class="kpi-card">
+                <h3>CRM Integration</h3>
+                <div class="kpi-value">ROI 320%</div>
+                <div class="kpi-target">Investícia: 15,000 EUR</div>
+                <div class="kpi-trend">→ 63,000 EUR/rok</div>
+            </div>
+            <div class="kpi-card">
+                <h3>Celkový ROI</h3>
+                <div class="kpi-value">278%</div>
+                <div class="kpi-target">Celková investícia: 106,300 EUR</div>
+                <div class="kpi-trend">→ 405,100 EUR/rok</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 Mercedes-Benz Panónska Market Intelligence Dashboard</p>
+        <p>Automatizovaná úloha: Každý pondelok 6:00 | GitHub Pages Deployment</p>
+        <p>Ďalšia aktualizácia: 21. júl 2025 | Real-time KPI monitoring</p>
+    </footer>
+
+    <script>
+        // Simple interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Mercedes-Benz Panónska Intelligence Dashboard loaded successfully!');
+            
+            // Add click handlers to navigation buttons
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Navigation clicked:', this.textContent);
+                });
+            });
+            
+            // Animate KPI cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all KPI cards
+            document.querySelectorAll('.kpi-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
